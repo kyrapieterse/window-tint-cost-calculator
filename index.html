@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-ZA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <meta name="description" content="Estimate the cost of tinting home or office windows in South African rand. Enter your glass measurements, installed rate and extra charges.">
+  <title>Window tinting cost calculator | Tint &amp; Screen</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="estimate.js"></script>
+  <script defer src="calculator.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to calculator</a>
+  <header class="masthead">
+    <div class="shell masthead-inner">
+      <img class="brand" src="tint-and-screen.svg" alt="Tint &amp; Screen" width="190" height="32">
+      <a class="guide-link" aria-label="Tint &amp; Screen window tinting price guide" href="https://tintandscreen.co.za/window-tinting-prices/">Pricing guide <span class="link-arrow" aria-hidden="true"></span></a>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="intro" aria-labelledby="page-title">
+      <div class="shell intro-inner">
+        <div class="intro-copy">
+          <h1 id="page-title">Window tinting<br>cost calculator</h1>
+          <p>Estimate the cost of tinting home or office windows in South African rand using your glass measurements and installed rate.</p>
+          <a id="view-estimate" class="view-estimate" href="#estimate-heading" hidden>View estimate</a>
+        </div>
+        <div class="drawing" role="img" aria-label="Window diagram. Measure the width and height of the visible glass inside the frame.">
+          <div class="dimension-width" aria-hidden="true"><span>Width</span></div>
+          <div class="dimension-height" aria-hidden="true"><span>Height</span></div>
+          <div class="window-frame" aria-hidden="true"><div class="window-glass"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <noscript><p class="shell no-script">Enable JavaScript to use the calculator. To work it out by hand, multiply each pane’s width in metres by its height and quantity. Add the areas, multiply by your installed rate, then add any extra charges.</p></noscript>
+
+    <div class="shell worksheet" id="worksheet" hidden>
+      <form class="entry" id="entry" novalidate autocomplete="off">
+        <section aria-labelledby="measure-heading">
+          <h2 id="measure-heading">Glass measurements</h2>
+          <p class="section-help">Measure the visible glass to the nearest millimetre. Group panes that have the same width and height.</p>
+          <div id="pane-groups"></div>
+          <button class="add-button" id="add-group" type="button"><span class="plus" aria-hidden="true"></span>Add pane group</button>
+        </section>
+        <section class="cost-section" aria-labelledby="cost-heading">
+          <h2 id="cost-heading">Installation costs</h2>
+          <p class="section-help" id="rate-help">R450/m² is the guide’s example rate for film, preparation and fitting. Replace it with your installer’s rate.</p>
+          <div class="cost-fields">
+            <div class="field">
+              <label for="rate">Installed rate <span class="visually-hidden">in rand per square metre</span></label>
+              <div class="control"><input id="rate" name="rate" type="number" inputmode="decimal" min="0.01" step="0.01" value="450" required aria-describedby="rate-help rate-error"><span aria-hidden="true">R/m²</span></div>
+              <p class="field-error" id="rate-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="extras">Extra charges <span class="optional">(optional)</span></label>
+              <div class="control"><input id="extras" name="extras" type="number" inputmode="decimal" min="0" step="0.01" value="0" aria-describedby="extras-help extras-error"><span aria-hidden="true">R</span></div>
+              <p class="field-error" id="extras-error" hidden></p>
+            </div>
+          </div>
+          <p class="field-note" id="extras-help">Add any once-off costs, such as travel or old film removal, in rand.</p>
+        </section>
+      </form>
+
+      <aside class="estimate" aria-labelledby="estimate-heading">
+        <div class="estimate-top">
+          <h2 id="estimate-heading" tabindex="-1">Estimated total</h2>
+          <p id="total" class="total">—</p>
+        </div>
+        <dl class="breakdown">
+          <div><dt>Glass panes</dt><dd id="pane-count">—</dd></div>
+          <div><dt>Glass area</dt><dd id="area">—</dd></div>
+          <div class="cost-line"><dt>Film and fitting</dt><dd id="fitting">—</dd></div>
+          <div><dt>Extra charges</dt><dd id="extra-total">—</dd></div>
+        </dl>
+        <p class="estimate-note" id="estimate-note">Your installer can confirm the final price after checking the glass, film choice and access.</p>
+      </aside>
+      <p class="visually-hidden" id="announcement" role="status" aria-atomic="true"></p>
+    </div>
+  </main>
+
+  <template id="pane-template">
+    <div class="pane-group" role="group">
+      <div class="group-heading"><h3></h3><button class="remove-button" type="button" data-remove>Remove</button></div>
+      <div class="dimensions">
+        <div class="field">
+          <label>Width <span class="visually-hidden">in millimetres</span></label>
+          <div class="control"><input data-key="widthMm" type="number" inputmode="numeric" min="1" step="1" required><span aria-hidden="true">mm</span></div>
+          <p class="field-error" hidden></p>
+        </div>
+        <div class="field">
+          <label>Height <span class="visually-hidden">in millimetres</span></label>
+          <div class="control"><input data-key="heightMm" type="number" inputmode="numeric" min="1" step="1" required><span aria-hidden="true">mm</span></div>
+          <p class="field-error" hidden></p>
+        </div>
+        <div class="field">
+          <label>Quantity</label>
+          <div class="control"><input data-key="quantity" type="number" inputmode="numeric" min="1" step="1" required value="1"></div>
+          <p class="field-error" hidden></p>
+        </div>
+      </div>
+    </div>
+  </template>
+</body>
+</html>
